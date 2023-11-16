@@ -1,23 +1,29 @@
 from weather_data import WeatherData
 from WeatherAPI import WeatherAPI
 
-# Calculating the rest of the parameters for WeatherData using built-in python functions
-weather_api = WeatherAPI()
-temperatures = weather_api.get_mean_temp()
-wind = weather_api.get_max_wind_speed()
-precipitation = weather_api.get_precipitation_sum()
+# Getting the past 5 years data
+data = WeatherAPI()
+past_data = data.get_past_five_years_data()
 
-average_temp = sum(temperatures) / len(temperatures)
-min_temp = min(temperatures)
-max_temp = max(temperatures)
+# Extract the temperature, wind speed, and precipitation data
+temperatures = [day['temperature_2m_mean'] for day in past_data]
+wind_speeds = [day['wind_speed_10m_max'] for day in past_data]
+precipitations = [day['precipitation_sum'] for day in past_data]
 
-average_wind = sum(wind) / len(wind)
-min_wind = min(wind)
-max_wind = max(wind)
+# Calculate the five-year averages
+average_temperature = sum(temperatures) / len(temperatures)
+average_wind_speed = sum(wind_speeds) / len(wind_speeds)
+sum_precipitation = sum(precipitations)
 
-average_precipitation = sum(precipitation) / len(precipitation)
-min_precipitation = min(precipitation)
-max_precipitation = max(precipitation)
+# Find the five-year minimums
+min_temperature = min(temperatures)
+min_wind_speed = min(wind_speeds)
+min_precipitation = min(precipitations)
+
+# Find the five-year maximums
+max_temperature = max(temperatures)
+max_wind_speed = max(wind_speeds)
+max_precipitation = max(precipitations)
 
 # Creating an instance of the WeatherData class using the variables I created above
 
@@ -27,14 +33,13 @@ weather_data = WeatherData(
     month=7,
     day_of_month=4,
     year=2023,
-    avg_temp=average_temp,
-    min_temp=min_temp,
-    max_temp=max_temp,
-    avg_wind_speed=average_wind,
-    min_wind_speed=min_wind,
-    max_wind_speed=max_wind,
-    sum_precipitation=average_precipitation,
+    avg_temp=average_temperature,
+    min_temp=min_temperature,
+    max_temp=max_temperature,
+    avg_wind_speed=average_wind_speed,
+    min_wind_speed=min_wind_speed,
+    max_wind_speed=max_wind_speed,
+    sum_precipitation=sum_precipitation,
     min_precipitation=min_precipitation,
     max_precipitation=max_precipitation
 )
-
