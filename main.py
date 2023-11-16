@@ -11,9 +11,9 @@ wind_speeds = [day['daily']['wind_speed_10m_max'][0] for day in past_data]
 precipitations = [day['daily']['precipitation_sum'][0] for day in past_data]
 
 # Calculate the five-year averages
-average_temperature = sum(temperatures) / len(temperatures)
+mean_temps = data.get_mean_temps(past_data)
 average_wind_speed = sum(wind_speeds) / len(wind_speeds)
-sum_precipitation = sum(precipitations)
+precipitation_sums = data.get_precipitation_sums(past_data)
 
 # Find the five-year minimums
 min_temperature = min(temperatures)
@@ -22,7 +22,7 @@ min_precipitation = min(precipitations)
 
 # Find the five-year maximums
 max_temperature = max(temperatures)
-max_wind_speed = max(wind_speeds)
+max_wind_speeds = data.get_max_wind_speeds(past_data)
 max_precipitation = max(precipitations)
 
 # Creating an instance of the WeatherData class using the variables I created above
@@ -33,13 +33,13 @@ weather_data = WeatherData(
     month=7,
     day_of_month=4,
     year=2023,
-    avg_temp=average_temperature,
+    avg_temp=mean_temps,
     min_temp=min_temperature,
     max_temp=max_temperature,
     avg_wind_speed=average_wind_speed,
     min_wind_speed=min_wind_speed,
-    max_wind_speed=max_wind_speed,
-    sum_precipitation=sum_precipitation,
+    max_wind_speed=max_wind_speeds,
+    sum_precipitation=precipitation_sums,
     min_precipitation=min_precipitation,
     max_precipitation=max_precipitation
 )
