@@ -8,7 +8,7 @@ class WeatherData:
         self.month = month,
         self.day_of_month = day_of_month,
         self.year = year,
-        self. avg_temp = avg_temp,
+        self.avg_temp = avg_temp,
         self.min_temp = min_temp,
         self.max_temp = max_temp,
         self.avg_wind_speed = avg_wind_speed,
@@ -17,3 +17,4 @@ class WeatherData:
         self.sum_precipitation = sum_precipitation,
         self.min_precipitation = min_precipitation,
         self.max_precipitation = max_precipitation
+
