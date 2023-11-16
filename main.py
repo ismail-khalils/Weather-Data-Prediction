@@ -6,9 +6,9 @@ data = WeatherAPI()
 past_data = data.get_past_five_years_data()
 
 # Extract the temperature, wind speed, and precipitation data
-temperatures = [day['temperature_2m_mean'] for day in past_data]
-wind_speeds = [day['wind_speed_10m_max'] for day in past_data]
-precipitations = [day['precipitation_sum'] for day in past_data]
+temperatures = [day['daily']['temperature_2m_mean'][0] for day in past_data]
+wind_speeds = [day['daily']['wind_speed_10m_max'][0] for day in past_data]
+precipitations = [day['daily']['precipitation_sum'][0] for day in past_data]
 
 # Calculate the five-year averages
 average_temperature = sum(temperatures) / len(temperatures)
