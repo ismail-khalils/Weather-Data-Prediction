@@ -9,17 +9,17 @@ class WeatherAPI:
         response = requests.get(self.api)
         self.data = json.loads(response.text)
 
-    def get_mean_temp(self):
-        mean_temp = self.data['daily']['temperature_2m_mean']
-        return mean_temp
+    def get_mean_temps(self, past_data):
+        mean_temps = [day['daily']['temperature_2m_mean'][0] for day in past_data]
+        return mean_temps
 
-    def get_max_wind_speed(self):
-        max_wind_speed = self.data['daily']['wind_speed_10m_max']
-        return max_wind_speed
+    def get_max_wind_speeds(self, past_data):
+        max_wind_speeds = [day['daily']['wind_speed_10m_max'][0] for day in past_data]
+        return max_wind_speeds
 
-    def get_precipitation_sum(self):
-        precipitation_sum = self.data['daily']['precipitation_sum']
-        return precipitation_sum
+    def get_precipitation_sums(self, past_data):
+        precipitation_sums = [day['daily']['precipitation_sum'][0] for day in past_data]
+        return precipitation_sums
 
     def get_past_five_years_data(self):
         past_data = []
