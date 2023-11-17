@@ -35,3 +35,43 @@ class WeatherTable(Base):
                 f"sum_precipitation={self.sum_precipitation}, min_precipitation={self.min_precipitation}, "
                 f"max_precipitation={self.max_precipitation})>")
 
+engine = create_engine('sqlite:///weather_data.db')
+Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
+
+
+# Create a new session
+session = Session()
+
+# Create a new WeatherTable object
+weather = WeatherTable(
+    location_latitude=38.658707,
+    location_longitude=-77.257919,
+    month=7,
+    day_of_month=4,
+    year=2023,
+    avg_temp=sum(mean_temps) / len(mean_temps),
+    min_temp=min_temperature,
+    max_temp=max_temperature,
+    avg_wind_speed=average_wind_speed,
+    min_wind_speed=min_wind_speed,
+    max_wind_speed=max(max_wind_speeds),
+    sum_precipitation=sum(precipitation_sums),
+    min_precipitation=min_precipitation,
+    max_precipitation=max_precipitation
+)
+
+# Check if an entry with the same data already exists
+existing_entry = session.query(WeatherTable).filter_by(
+    location_latitude=weather.location_latitude,
+    location_longitude=weather.location_longitude,
+    month=weather.month,
+    day_of_month=weather.day_of_month,
+    year=weather.year
+).first()
+
+# If no such entry exists, add the new object to the session
+if existing_entry is None:
+    session.add(weather)
+    session.commit()
