@@ -2,6 +2,8 @@ import unittest
 from WeatherAPI import WeatherAPI
 
 # Creating 3 unit test cases, one for each method
+
+
 class TestWeatherAPI(unittest.TestCase):
     def setUp(self):
         self.api = WeatherAPI()
@@ -20,6 +22,7 @@ class TestWeatherAPI(unittest.TestCase):
         past_data = self.api.get_past_five_years_data()
         result = self.api.get_precipitation_sums(past_data)
         self.assertIsInstance(result, list)
+
 
 if __name__ == '__main__':
     unittest.main()
