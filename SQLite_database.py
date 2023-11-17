@@ -40,6 +40,17 @@ Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 
+def query_weather_data():
+    # Create a new session
+    session = Session()
+
+    # Query the WeatherTable
+    weather_data = session.query(WeatherTable).all()
+
+    # Close the session
+    session.close()
+
+    return weather_data
 
 # Create a new session
 session = Session()
@@ -75,3 +86,5 @@ existing_entry = session.query(WeatherTable).filter_by(
 if existing_entry is None:
     session.add(weather)
     session.commit()
+
+print(query_weather_data())
