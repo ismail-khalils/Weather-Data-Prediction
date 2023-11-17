@@ -40,6 +40,7 @@ Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 
+# Creating function to query table
 def query_weather_data():
     # Create a new session
     session = Session()
