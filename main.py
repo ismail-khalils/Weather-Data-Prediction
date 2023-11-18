@@ -33,13 +33,14 @@ weather_data = WeatherData(
     month=7,
     day_of_month=4,
     year=2023,
-    avg_temp=mean_temps,
+    avg_temp=sum(mean_temps) / len(mean_temps),
     min_temp=min_temperature,
     max_temp=max_temperature,
     avg_wind_speed=average_wind_speed,
     min_wind_speed=min_wind_speed,
-    max_wind_speed=max_wind_speeds,
-    sum_precipitation=precipitation_sums,
+    max_wind_speed=max(max_wind_speeds),
+    sum_precipitation=sum(precipitation_sums),
     min_precipitation=min_precipitation,
     max_precipitation=max_precipitation
 )
+print(weather_data)
