@@ -35,6 +35,8 @@ class WeatherTable(Base):
                 f"sum_precipitation={self.sum_precipitation}, min_precipitation={self.min_precipitation}, "
                 f"max_precipitation={self.max_precipitation})>")
 
+
+
 engine = create_engine('sqlite:///weather_data.db')
 Base.metadata.create_all(engine)
 
@@ -88,4 +90,4 @@ if existing_entry is None:
     session.add(weather)
     session.commit()
 
-print(query_weather_data())
+query_weather_data()
